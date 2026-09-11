@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>JHCORE · Parameter &amp; Case Console · v3.2.1</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: #008080;
+    font-family: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, sans-serif;
+    font-size: 12px;
+    color: #000;
+  }
+  .desktop { padding: 24px; min-height: 100vh; }
+  .window {
+    width: 920px;
+    margin: 0 auto;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #dfdfdf #000 #000 #dfdfdf;
+    box-shadow: 4px 4px 0 #000;
+  }
+  .titlebar {
+    background: linear-gradient(90deg, #000080, #1084d0);
+    color: #fff;
+    padding: 3px 6px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+  }
+  .titlebar .btns button {
+    width: 16px; height: 14px; font-size: 9px; padding: 0;
+    margin-left: 2px;
+    background: #c0c0c0;
+    border: 1px solid;
+    border-color: #fff #000 #000 #fff;
+  }
+  .menubar {
+    background: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 6px;
+  }
+  .menubar span { margin-right: 14px; }
+  .banner {
+    background: #ffff80;
+    border-bottom: 2px solid #808000;
+    padding: 4px 8px;
+    font-weight: bold;
+    color: #800000;
+  }
+  .body { padding: 10px; }
+  fieldset {
+    border: 2px groove #fff;
+    margin: 0 0 10px;
+    padding: 8px 10px 10px;
+  }
+  legend { padding: 0 4px; font-weight: bold; }
+  table.form td { padding: 3px 6px; vertical-align: middle; }
+  table.form td.lbl { width: 140px; }
+  input[type=text], input[type=password], select, textarea {
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    background: #fff;
+    border: 2px inset #808080;
+    padding: 2px 4px;
+  }
+  input[type=text], select { width: 280px; }
+  textarea { width: 100%; height: 72px; }
+  button, .btn {
+    font-family: "MS Sans Serif", Tahoma, sans-serif;
+    font-size: 12px;
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #fff #000 #000 #fff;
+    padding: 3px 12px;
+    cursor: pointer;
+  }
+  button:active { border-color: #000 #fff #fff #000; }
+  button.primary { font-weight: bold; }
+  button:disabled {
+    color: #808080;
+    cursor: not-allowed;
+  }
+  .statusbar {
+    border-top: 1px solid #fff;
+    border-top-color: #808080;
+    padding: 3px 8px;
+    display: flex;
+    justify-content: space-between;
+    background: #c0c0c0;
+    font-size: 11px;
+  }
+  .green-panel {
+    background: #000;
+    color: #33ff33;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    padding: 8px;
+    border: 2px inset #808080;
+    height: 160px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+  }
+  .login-wrap { width: 420px; margin: 80px auto; }
+  .hidden { display: none; }
+  .row-actions { margin-top: 8px; }
+  .warn { color: #800000; font-weight: bold; }
+  .ok { color: #008000; font-weight: bold; }
+  a { color: #000080; }
+</style>
+</head>
+<body>
+<div class="desktop">
+
+  <!-- LOGIN -->
+  <div id="login" class="login-wrap window">
+    <div class="titlebar">
+      <span>JHCORE Sign-On · SYS01</span>
+      <span class="btns"><button>_</button><button>□</button><button>×</button></span>
+    </div>
+    <div class="banner">DEMO SANDBOX — not a real Jack Henry system. Fake FI data only.</div>
+    <div class="body">
+      <fieldset>
+        <legend>User Profile</legend>
+        <table class="form">
+          <tr><td class="lbl">Environment</td><td>
+            <select id="env"><option>PROD · SYS01 (demo)</option><option>TEST · SYS02</option></select>
+          </td></tr>
+          <tr><td class="lbl">User ID</td><td><input type="text" id="uid" value="ANALYST01" /></td></tr>
+          <tr><td class="lbl">Password</td><td><input type="password" id="pwd" value="demo" /></td></tr>
+          <tr><td class="lbl">Library list</td><td><input type="text" value="JHCORE QGPL QTEMP" readonly /></td></tr>
+        </table>
+      </fieldset>
+      <div class="row-actions">
+        <button class="primary" id="btnLogin" type="button">Sign On</button>
+        <button type="button" onclick="alert('Password reset requires Security Officer approval (SOP 4.2).')">Forgot Password…</button>
+      </div>
+      <p style="margin-top:12px;color:#404040">Tip for demo: click Sign On. Bots use the same path.</p>
+    </div>
+    <div class="statusbar"><span>Connected: 10.4.22.18</span><span>v3.2.1 · Build 1998.06</span></div>
+  </div>
+
+  <!-- MAIN -->
+  <div id="main" class="window hidden">
+    <div class="titlebar">
+      <span>JHCORE · Case Log &amp; Parameter Console · ANALYST01@SYS01</span>
+      <span class="btns"><button>_</button><button>□</button><button>×</button></span>
+    </div>
+    <div class="menubar">
+      <span><u>F</u>ile</span><span><u>E</u>dit</span><span><u>C</u>ase</span><span><u>P</u>arameters</span><span><u>H</u>elp</span>
+    </div>
+    <div class="banner">DEMO SANDBOX — Case log writes are local only. “Apply Parameter Change” stays HUMAN-ONLY.</div>
+    <div class="body">
+      <fieldset>
+        <legend>Find Case</legend>
+        <table class="form">
+          <tr>
+            <td class="lbl">Ticket / Case ID</td>
+            <td>
+              <input type="text" id="caseId" value="JIRA-001" />
+              <button type="button" class="primary" id="btnFind">Retrieve (F4)</button>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+
+      <fieldset>
+        <legend>Case Header</legend>
+        <table class="form" id="header">
+          <tr><td class="lbl">FI</td><td id="fi">—</td></tr>
+          <tr><td class="lbl">Product</td><td id="product">—</td></tr>
+          <tr><td class="lbl">Type</td><td id="ctype">—</td></tr>
+          <tr><td class="lbl">Status</td><td id="cstatus">—</td></tr>
+          <tr><td class="lbl">SLA</td><td id="sla">—</td></tr>
+        </table>
+      </fieldset>
+
+      <fieldset>
+        <legend>Case Log (read / append)</legend>
+        <div class="green-panel" id="logView">Retrieve a case to view log…</div>
+        <p style="margin:8px 0 4px"><b>New log entry</b> <span class="warn">(bot may fill + Post Log; human still owns customer send &amp; Done)</span></p>
+        <table class="form" style="width:100%">
+          <tr><td class="lbl">Operator</td><td><input type="text" id="op" value="ANALYST01" /></td></tr>
+          <tr><td class="lbl">Entry type</td><td>
+            <select id="etype">
+              <option>STATUS</option>
+              <option selected>WORKNOTE</option>
+              <option>PARAM_PLAN</option>
+              <option>TRAINING</option>
+            </select>
+          </td></tr>
+          <tr><td class="lbl" style="vertical-align:top">Text</td><td>
+            <textarea id="logText" placeholder="Type case log text…"></textarea>
+          </td></tr>
+        </table>
+        <div class="row-actions">
+          <button type="button" class="primary" id="btnPost">Post Log Entry</button>
+          <button type="button" id="btnClear">Clear</button>
+          <button type="button" disabled title="Human only in this demo">Apply Parameter Change…</button>
+          <button type="button" disabled title="Human only">Send Customer Notice…</button>
+        </div>
+        <p id="msg" style="margin-top:8px"></p>
+      </fieldset>
+    </div>
+    <div class="statusbar">
+      <span id="clock">Ready</span>
+      <span>Library: JHCORE · Job: QPADEV0001</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const CASES = {
+  "JIRA-001": {
+    fi: "First Community CU · FI# 44821",
+    product: "Document / ECM bridge (Synergy-class) ↔ Core",
+    ctype: "Core migration · keep link up during cutover",
+    cstatus: "OPEN · mapping incomplete",
+    sla: "Status due TODAY 16:00 local",
+    log: [
+      "1998-06-12 09:14  SYSTEM     Case opened from Jira bridge.",
+      "2026-09-11 08:02  ANALYST01  Retrieved FI mapping worksheet — 3 params TBD.",
+      "2026-09-11 10:41  ANALYST01  Customer asked for afternoon status + post-cutover training."
+    ]
+  },
+  "JIRA-003": {
+    fi: "Ozark CU · FI# 55209",
+    product: "Card Processing Solutions · Install",
+    ctype: "Install · parameters incomplete",
+    cstatus: "IN PROGRESS",
+    sla: "Update due end of day",
+    log: [
+      "2026-09-10 14:22  ANALYST01  Install started. Param set 1–4 complete.",
+      "2026-09-11 09:05  ANALYST01  Param set 5–7 blocked on FI network cert."
+    ]
+  }
+};
+
+function show(id) {
+  document.getElementById("login").classList.add("hidden");
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById(id).classList.remove("hidden");
+}
+
+function renderLog(lines) {
+  document.getElementById("logView").textContent = lines.join("\n");
+}
+
+function loadCase(id) {
+  const c = CASES[id];
+  const msg = document.getElementById("msg");
+  if (!c) {
+    msg.innerHTML = '<span class="warn">Case not found in SYS01. Check ticket ID.</span>';
+    return;
+  }
+  document.getElementById("fi").textContent = c.fi;
+  document.getElementById("product").textContent = c.product;
+  document.getElementById("ctype").textContent = c.ctype;
+  document.getElementById("cstatus").textContent = c.cstatus;
+  document.getElementById("sla").textContent = c.sla;
+  renderLog(c.log);
+  msg.innerHTML = '<span class="ok">Case ' + id + ' retrieved.</span>';
+  document.getElementById("clock").textContent = "Case " + id + " active";
+}
+
+document.getElementById("btnLogin").onclick = function () {
+  show("main");
+  loadCase((document.getElementById("caseId").value || "JIRA-001").trim().toUpperCase());
+};
+
+document.getElementById("btnFind").onclick = function () {
+  const id = document.getElementById("caseId").value.trim().toUpperCase();
+  document.getElementById("caseId").value = id;
+  loadCase(id);
+};
+
+document.getElementById("btnClear").onclick = function () {
+  document.getElementById("logText").value = "";
+};
+
+document.getElementById("btnPost").onclick = function () {
+  const id = document.getElementById("caseId").value.trim().toUpperCase();
+  const c = CASES[id];
+  const msg = document.getElementById("msg");
+  if (!c) {
+    msg.innerHTML = '<span class="warn">Retrieve a case first.</span>';
+    return;
+  }
+  const text = document.getElementById("logText").value.trim();
+  if (!text) {
+    msg.innerHTML = '<span class="warn">Log text required.</span>';
+    return;
+  }
+  const op = document.getElementById("op").value.trim() || "ANALYST01";
+  const et = document.getElementById("etype").value;
+  const now = new Date();
+  const stamp = now.getFullYear() + "-" +
+    String(now.getMonth()+1).padStart(2,"0") + "-" +
+    String(now.getDate()).padStart(2,"0") + " " +
+    String(now.getHours()).padStart(2,"0") + ":" +
+    String(now.getMinutes()).padStart(2,"0");
+  const line = stamp + "  " + op.padEnd(9).slice(0,9) + "  [" + et + "] " + text;
+  c.log.push(line);
+  renderLog(c.log);
+  document.getElementById("logView").scrollTop = 99999;
+  document.getElementById("logText").value = "";
+  msg.innerHTML = '<span class="ok">Log entry posted to ' + id + ' (sandbox). Parameter Apply + Customer Notice still human-only.</span>';
+};
+
+// Enter on case id
+document.getElementById("caseId").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") document.getElementById("btnFind").click();
+});
+</script>
+</body>
+</html>
